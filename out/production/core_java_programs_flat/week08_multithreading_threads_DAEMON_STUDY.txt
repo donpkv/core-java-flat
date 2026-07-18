@@ -1,0 +1,53 @@
+DAEMON THREADS — STUDY PATH (run from core_java_programs/)
+
+Concept in 30 seconds:
+  - User thread (default)     → JVM waits for it to finish
+  - Daemon thread             → JVM does NOT wait; killed when all user threads end
+  - main is always a user thread; you cannot make main a daemon
+  - setDaemon(true) BEFORE start()
+
+Run order (each ~10–30 seconds):
+
+  D01  DaemonBasicsDemo.java
+       Create daemon, main sleeps 2s, JVM exits and kills daemon mid-loop
+
+  D02  DaemonUserThreadKeepsJvmAliveDemo.java
+       main ends but JVM waits for user-worker (no join on main)
+
+  D03  DaemonDoesNotKeepJvmAliveDemo.java
+       Compare D02: daemon plans 20 steps, main exits instantly — cut off
+
+  D04  DaemonHeartbeatBackgroundDemo.java
+       GOOD pattern: daemon heartbeat + main does real batch work
+
+  D05  DaemonWrongPatternDemo.java
+       BAD pattern: entire app in daemon — work abandoned when main exits
+
+  D06  DaemonSetDaemonAfterStartFailsDemo.java
+       setDaemon after start() → IllegalThreadStateException
+
+  D07  DaemonChildInheritsStatusDemo.java
+       Child inherits daemon flag from creating thread
+
+Compile all:
+  javac threads/Daemon*.java
+
+When to USE daemon:
+  ✓ Heartbeat / metrics ping
+  ✓ Background cache sweeper
+  ✓ JVM-internal helpers (GC is daemon-like)
+
+When NOT to use daemon:
+  ✗ Primary business logic
+  ✗ Work that must flush files/DB on shutdown
+  ✗ Producer-consumer processing pipeline
+
+For graceful shutdown use:
+  - interrupt() + check isInterrupted() in loop (see D04)
+  - or ExecutorService shutdown + awaitTermination
+  - or Runtime.addShutdownHook() for final cleanup (not a daemon replacement)
+
+Practice (write in CoreJava/):
+  P1. Daemon logger: main processes 5 items; daemon prints timestamp every 1s
+  P2. Fix D05: move app logic to user thread + join()
+  P3. Explain output difference between D02 and D03 in 3 sentences

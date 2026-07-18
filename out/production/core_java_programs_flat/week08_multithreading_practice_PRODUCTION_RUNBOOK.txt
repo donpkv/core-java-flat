@@ -1,0 +1,55 @@
+PRODUCTION RUNBOOK — THREAD CONFLICTS & BOTTLENECKS
+=====================================================
+
+WHEN TO ACT
+  App hang, timeouts, latency spike, CPU 100% or CPU low but requests stuck
+
+STEP 1 — CAPTURE THREAD DUMPS (low overhead)
+  jps -l                              # find PID
+  jcmd <PID> Thread.print > t1.txt
+  sleep 5
+  jcmd <PID> Thread.print > t2.txt
+  sleep 5
+  jcmd <PID> Thread.print > t3.txt
+
+  Alternative: kill -3 <PID> (Linux) sends SIGQUIT → dump in app logs
+
+STEP 2 — ANALYZE DUMP
+  Deadlock     → bottom of file: "Found one Java-level deadlock"
+  BLOCKED      → many threads waiting on same monitor → find holder thread
+  RUNNABLE     → same line across t1,t2,t3 → infinite loop or heavy CPU work
+  WAITING      → normal on pool/queue; bad if ALL workers WAITING forever
+
+  Tools: fastThread.io, VisualVM, IntelliJ Analyze Thread Dump
+
+STEP 3 — FIX PATTERNS (see P03–P09)
+  Read-heavy map        → ReentrantReadWriteLock
+  Shared counter        → LongAdder / AtomicInteger
+  Non-thread-safe util  → ThreadLocal (+ remove() in pools)
+  Task pile-up          → bounded queue + CallerRunsPolicy / reject policy
+  Too many parallel IO  → Semaphore throttle
+  Cache check-then-put  → ConcurrentHashMap.computeIfAbsent
+
+STEP 4 — APM ALERTS
+  Thread count spike
+  Lock contention time ↑
+  Thread pool queue depth ↑
+  RejectedExecutionException in logs
+
+NEVER IN PRODUCTION
+  Heavy live TCP profilers (JProfiler/YourKit attached) — can pause JVM
+  Pausing JVM for long heap walks during peak traffic
+
+BOTTLENECK RESOLUTION CHECKLIST
+  [ ] Identify hot lock in thread dump stack traces
+  [ ] Measure read vs write ratio on shared structure
+  [ ] Replace synchronizedMap/Hashtable with j.u.c equivalents
+  [ ] Bound thread pool queue; define rejection/backpressure policy
+  [ ] Limit external call concurrency (Semaphore)
+  [ ] Remove unnecessary shared mutable state (ThreadLocal)
+
+STAR ANSWER TEMPLATE (IBM behavioral)
+  Situation: latency spike at peak traffic
+  Task: find root cause without downtime
+  Action: 3 thread dumps → BLOCKED on payment sync block → RW lock
+  Result: 40% latency reduction, no functional change

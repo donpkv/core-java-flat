@@ -1,0 +1,58 @@
+PRODUCTION RUNBOOK — MEMORY LEAKS & HEAP ANALYSIS
+==================================================
+
+SYMPTOMS
+  Sluggish app, Full GC storms, OutOfMemoryError, heap alerts > 80%
+
+STEP 1 — GC LOGS (enable at startup)
+  -Xlog:gc*,gc+age=trace,gc+phases=debug:file=/var/log/app/gc.log:time,uptime,pid:filecount=5,filesize=100M
+
+  Healthy: sawtooth. Leak: staircase baseline after Full GC.
+
+STEP 2 — LOW OVERHEAD LIVE CHECKS
+  jps -l
+  jcmd <PID> VM.flags
+  jcmd <PID> GC.heap_info
+  jcmd <PID> GC.class_histogram
+  jmap -histo:live <PID>              # top 50 classes — no full dump file
+
+STEP 3 — HEAP DUMP (when needed)
+  Auto on crash:
+    -XX:+HeapDumpOnOutOfMemoryError
+    -XX:HeapDumpPath=/var/log/app/heap.hprof
+
+  Manual (sluggish, not crashed):
+    jcmd <PID> GC.heap_dump /var/log/app/live_dump.hprof
+
+  WARNING: large dumps (GB). Prune with histogram first.
+
+STEP 4 — ANALYZE OFFLINE
+  Eclipse MAT → Leak Suspects
+  VisualVM → dominator tree
+  Find: static HashMap/ArrayList, unbounded cache, classloader leak
+
+STEP 5 — JFR (<1% overhead)
+  jcmd <PID> JFR.start name=LeakCheck duration=10m filename=prod.jfr settings=profile
+  jcmd <PID> JFR.dump name=LeakCheck filename=prod.jfr
+  Open in JDK Mission Control
+
+STEP 6 — ALERTS
+  Heap used > 80%
+  GC time > 5% of application time
+  Full GC frequency spike
+
+NEVER
+  Full heap dump every minute in prod
+  Heavy profiler attached over TCP during peak
+
+COMMON ERRORS
+  OutOfMemoryError: Java heap space     → object leak / under-sized -Xmx
+  OutOfMemoryError: Metaspace           → class explosion
+  OutOfMemoryError: unable to create native thread → too many threads
+  StackOverflowError                    → recursion (stack, not heap)
+
+JVM FLAGS CHEAT SHEET
+  -Xms512m -Xmx2g
+  -XX:MaxMetaspaceSize=256m
+  -XX:+UseG1GC
+  -Xlog:gc*:file=gc.log

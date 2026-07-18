@@ -1,0 +1,98 @@
+WEEK 06 API PRACTICE — CONCEPT QUESTIONS & SCENARIOS
+=====================================================
+Use after Week 1 IO practice. Answer in your own words before peeking at P01–P06.
+
+--------------------------------------------------------------------------------
+BUFFERED READER
+--------------------------------------------------------------------------------
+Q1. What is the difference between read() and readLine() on BufferedReader?
+    - read()  → one character as int (ASCII/Unicode code), -1 at EOF
+    - readLine() → whole line as String, null at EOF
+
+Q2. Why use StringBuilder inside while ((line = reader.readLine()) != null)?
+    - HTTP/file body may be one long line or many lines; append each line into one string.
+
+Q3. Why append line without adding "\n" back?
+    - JSON APIs often return minified one-line JSON; newlines are optional for parsing.
+
+Q4. readLine() returns null — what does that mean?
+    - End of stream (EOF). Same idea as read() returning -1.
+
+Q5. Can BufferedReader read word-by-word like Scanner.next()?
+    - No built-in method. Use Scanner.next(), or readLine()+split("\\s+"), or manual read() loop.
+
+--------------------------------------------------------------------------------
+REGEX (Pattern / Matcher)
+--------------------------------------------------------------------------------
+Q6. What does Pattern.compile("\"total_pages\":\\s*(\\d+)") mean?
+    - Match literal "total_pages": then optional whitespace \\s*, capture digits in group 1.
+
+Q7. What is group(0) vs group(1)?
+    - group(0) = entire match
+    - group(1) = first parentheses capture (the \\d+ part)
+
+Q8. What does (.*?) mean in "\"name\":\\s*\"(.*?)\"\"?
+    - Non-greedy any characters inside quotes — stops at first closing quote.
+
+Q9. Why Pattern.compile("\\{([^{}]+)\\}") for JSON objects?
+    - Matches { ... } blocks with no nested { } — works for flat objects in "data" array.
+    - Breaks if JSON has nested objects (use Jackson/Gson in real apps).
+
+Q10. In Java string, why "\\s+" and not "\s+"?
+    - Backslash must be escaped in Java strings; regex engine sees \s+
+
+--------------------------------------------------------------------------------
+HTTP / URL
+--------------------------------------------------------------------------------
+Q11. Why URLEncoder.encode(marathon, UTF-8).replace("+", "%20")?
+    - Spaces become + by default; query strings often need %20 for spaces.
+
+Q12. What does HttpURLConnection.getInputStream() give you?
+    - Byte stream of response body — wrap with InputStreamReader + BufferedReader for text.
+
+Q13. Scenario: API returns page 1 with total_pages=5. What loop structure?
+    - int currentPage = 1, totalPages = 1;
+    - while (currentPage <= totalPages) { fetch page; if page==1 parse total_pages; currentPage++; }
+
+Q14. Scenario: findSpeedster — why re-check marathon_name and sex in each object?
+    - API filter may be loose; verify client-side before comparing top_speed.
+
+--------------------------------------------------------------------------------
+SCANNER (still relevant in API tasks)
+--------------------------------------------------------------------------------
+Q15. nextInt() then nextLine() — when is nextLine() correct?
+    - When next input is a STRING on the NEXT line (clears leftover newline only).
+
+Q16. User types "11 22" for first int prompt — nextLine() after nextInt() eats the 22. Why?
+    - nextInt() reads 11; nextLine() reads rest of line " 22" — not just \n.
+
+Q17. Two ints on ONE line — best approach?
+    - nextInt(); nextInt();  OR  one nextLine() + split("\\s+") + parseInt
+
+Q18. What does trim() do?
+    - Removes leading/trailing whitespace; does not change middle spaces.
+
+Q19. !sc.hasNextInt() — why sc.next() after invalid input?
+    - hasNextInt() only peeks; must discard bad token or infinite invalid loop.
+
+--------------------------------------------------------------------------------
+SCENARIO DRILLS (write mini code in CoreJava/)
+--------------------------------------------------------------------------------
+S1. Read mock JSON file; print count of runners with top_speed > 20
+S2. Paginate offline page1+page2; list all F runners sorted by speed (manual max loop OK)
+S3. Build GET URL with 3 query params including one with spaces
+S4. Given string "{\"top_speed\": 18.2}", extract 18.2 without splitting on spaces only
+S5. Compare: same read loop on FileReader vs InputStreamReader(con.getInputStream())
+
+INTERVIEW STYLE (findSpeedster family)
+--------------------------------------
+- Input: marathon name (String), sex (String)
+- Call paginated REST API
+- Parse JSON without library (regex or manual)
+- Return name with highest top_speed matching filters
+- Edge: empty data → return ""
+- Edge: tie on speed → any max is usually OK unless problem says otherwise
+
+Reference solution offline: P04_FindSpeedsterOffline.java
+Live regex demo: P05_HttpGetBufferedReaderLiveDemo.java
+Live full solution (Gson): P06_FindSpeedsterLiveGson.java

@@ -1,0 +1,45 @@
+WEEK 10 — JVM PRODUCTION Q&A
+=============================
+
+Q1. What is a memory leak in Java if GC exists?
+A. Objects no longer needed but still referenced (static cache, listeners, ThreadLocal) → GC cannot collect.
+
+Q2. Sawtooth vs staircase heap chart?
+A. Sawtooth = healthy GC cycles to stable baseline. Staircase = baseline rises after Full GC → leak.
+
+Q3. First production step when leak suspected?
+A. Metrics/GC logs — confirm pattern before heap dump.
+
+Q4. HeapDumpOnOutOfMemoryError purpose?
+A. Auto snapshot .hprof on crash for post-mortem MAT analysis.
+
+Q5. jmap -histo:live vs full heap dump?
+A. Histogram = text summary of top objects, low overhead. Full dump = entire heap, heavy.
+
+Q6. jcmd GC.heap_dump vs jmap -dump?
+A. Both capture heap; jcmd preferred on modern JDK, works with running PID.
+
+Q7. What is JFR and why safe in prod?
+A. Java Flight Recorder — built-in, typically <1% overhead, records allocations/GC/events.
+
+Q8. StackOverflowError vs heap OOM?
+A. Stack = too deep recursion / large stack frames. Heap = too many objects on heap.
+
+Q9. Metaspace OOM cause?
+A. Too many loaded classes — dynamic proxies, hot reload, Groovy scripting.
+
+Q10. ThreadLocal leak in pools?
+A. Pool reuses threads; ThreadLocal values not removed → objects live forever. Fix: remove() in finally.
+
+Q11. How identify leak suspect class in MAT?
+A. Leak Suspects report → dominator tree → retainer path to GC root (often static field).
+
+Q12. Should you call System.gc() in production?
+A. No — GC runs on JVM schedule; System.gc() is hint only and can cause pause spikes.
+
+SCENARIO DRILLS
+S1. Full GC every 30 sec, heap still 95% — next 3 commands?
+S2. OOM heap space overnight — what flag should have been on JVM startup?
+S3. App slow, heap 70% — dump or histogram first? Why?
+
+Answers: PRODUCTION_RUNBOOK.txt + P05 checklist

@@ -1,0 +1,57 @@
+CORE JAVA FLAT — PRACTICE MODULE INDEX
+======================================
+Folder: core_java_programs_flat/
+Source: core_java_programs/ (runnable tree)
+Your code: CoreJava/ ONLY
+
+WEEK 1 IO (P01-P25)
+  week01_basics_practice_P01_... through P25_...
+  week01_basics_practice_FILE_IO_QUESTIONS.txt
+  week01_basics_practice_FILE_OPEN_MODES.txt
+  File modes: P19 truncate | P20 append | P21-P25 NIO OpenOption
+  Data: week01_basics_practice_data_*.txt
+  Multi-thread IO: P15-P18 | Run from: core_java_programs/
+
+WEEK 2 INHERITANCE PROBLEMS MAP (I01-I12)
+  core_java_program_map/  (index + scenarios)
+  Runnable: core_java_programs/inheritance_map/
+  Flat: week02_oop_inheritance_map_I01_... through I21_...
+  Last 9 Q&A: I13-I21 (see core_java_program_map/README.txt)
+
+WEEK 6 API / HTTP (P01-P05)
+  week06_io_datetime_practice_P01_... through P06_...
+  week06_io_datetime_practice_QUESTIONS.txt
+  week06_io_datetime_practice_PRACTICE.txt
+  Data: week06_io_datetime_practice_data_marathon_page1.json (page2, sample_oneline)
+
+WEEK 8 EXECUTOR + COMPLETABLEFUTURE + LOCKS (E01-E06, C01-C04, L01-L03)
+  week08_multithreading_concurrency_EXECUTOR_STUDY.txt
+  week08_multithreading_concurrency_FutureCallableDemo.java through StampedLockDemo.java
+  Run from: core_java_programs/  (package concurrency)
+
+WEEK 8 MULTITHREADING BASICS + DAEMON (D01-D07)
+  week08_multithreading_threads_DAEMON_STUDY.txt
+  week08_multithreading_threads_DaemonBasicsDemo.java through DaemonChildInheritsStatusDemo.java
+  Run from: core_java_programs/  (package threads)
+
+WEEK 8 PRODUCTION THREADS (P01-P09)
+  week08_multithreading_practice_P01_... through P09_...
+  week08_multithreading_practice_QUESTIONS.txt
+  week08_multithreading_practice_PRODUCTION_RUNBOOK.txt
+  week08_multithreading_practice_PRACTICE.txt
+
+WEEK 10 PRODUCTION JVM (P01-P06)
+  week10_jvm_practice_P01_... through P06_...
+  week10_jvm_practice_QUESTIONS.txt
+  week10_jvm_practice_PRODUCTION_RUNBOOK.txt
+  week10_jvm_practice_PRACTICE.txt
+
+WEEK 11 IBM INTERVIEW
+  week11_interview_practice_IBM_BACKEND_QA_WITH_SOLUTIONS.txt
+  week11_interview_practice_P01_... through P03_...
+  week11_interview_practice_PRACTICE.txt
+
+STUDY PATH: STUDY_ORDER.txt (Day 35+ API, Day 52+ threads, Day 62+ JVM, Day 65+ interview)
+
+NOTE: Flat .java files use short class names (P01_...) — compile/run from
+core_java_programs/<module_folder>/ not from flat filenames directly.

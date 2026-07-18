@@ -1,0 +1,68 @@
+WEEK 08 — THREAD PRODUCTION Q&A
+================================
+
+PART A — IDENTIFYING THREAD CONFLICTS IN PRODUCTION
+---------------------------------------------------
+Q1. Why not attach a heavy profiler in production?
+A. High overhead, can pause JVM, unacceptable latency. Use jcmd dumps, JFR, APM.
+
+Q2. How capture thread state safely?
+A. jcmd <PID> Thread.print — 3 dumps 5 seconds apart to see movement vs stuck.
+
+Q3. How detect deadlock in dump?
+A. JVM prints "Found one Java-level deadlock" at bottom with thread names + locks.
+
+Q4. What does BLOCKED mean?
+A. Thread waiting for monitor held by another thread. Stack trace shows lock line.
+
+Q5. RUNNABLE but same stack in all dumps?
+A. Likely infinite loop or CPU spin — not making progress on work queue.
+
+Q6. What APM metrics help?
+A. Thread count, lock contention time, pool queue depth, rejected tasks.
+
+PART B — RESOLVING BOTTLENECKS
+------------------------------
+Q7. synchronized on read-heavy map — fix?
+A. ReentrantReadWriteLock — parallel reads, exclusive writes.
+
+Q8. Hot shared counter — fix?
+A. AtomicInteger (low contention) or LongAdder (high contention).
+
+Q9. Collections.synchronizedMap vs ConcurrentHashMap?
+A. synchronizedMap locks whole map per op. CHM uses striped buckets + volatile reads.
+
+Q10. Why ThreadLocal for SimpleDateFormat?
+A. Formatter not thread-safe; per-thread copy avoids locks. Call remove() in pools.
+
+Q11. Unbounded queue in ThreadPoolExecutor risk?
+A. Tasks accumulate in memory → GC pressure, OOM, huge latency. Use bounded queue.
+
+Q12. What does CallerRunsPolicy do?
+A. When queue full, submitting thread runs task → natural backpressure on ingress.
+
+Q13. Semaphore vs ThreadPool?
+A. Pool limits worker threads. Semaphore limits concurrent access to resource (DB/API).
+
+PART C — DATA STRUCTURE SELECTION
+---------------------------------
+Structure              | Read/Write        | Use case
+ConcurrentHashMap      | high read         | cache, registry, sessions
+CopyOnWriteArrayList   | rare write        | listeners, config lists
+ConcurrentLinkedQueue  | balanced          | lock-free messaging
+ArrayBlockingQueue     | balanced + bounds | producer-consumer, pool queue
+
+Q14. Why computeIfAbsent not containsKey+put?
+A. Two threads can both see missing key and double-load. computeIfAbsent is atomic.
+
+Q15. Legacy anti-patterns?
+A. Hashtable, Vector, synchronizedMap/List for hot paths under load.
+
+PART D — SCENARIO DRILLS
+------------------------
+S1. 50 threads BLOCKED on PaymentService.lock — what next?
+S2. Thread count grows unbounded — what config to check?
+S3. Pool queue size always max — scale threads or fix slow consumer?
+S4. Same user ID hits cache miss 50 times concurrently — which API fixes it?
+
+Answers in P02, P05, P07, P09 source code + PRODUCTION_RUNBOOK.txt

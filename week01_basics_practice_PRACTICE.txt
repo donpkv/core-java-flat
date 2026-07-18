@@ -1,0 +1,63 @@
+WEEK 01 — INPUT / IO REFERENCE PRACTICE (source of truth)
+============================================================
+Location : core_java_programs/week01_practice/
+Flat copy: core_java_programs_flat/week01_basics_practice_*
+Study order: STUDY_ORDER.txt Day 4 — P01 through P25 in sequence
+
+Run from working directory = core_java_programs folder (IntelliJ module root).
+YOUR CODE ONLY goes in: CoreJava/
+
+================================================================================
+STUDY SEQUENCE (P01 → P25) — follow this order
+================================================================================
+P01  ScannerSumTwoNumbers.java              — Scanner basics, two ints
+P02  ScannerNextLineTrapDemo.java            — nextInt + nextLine trap
+P03  ScannerInvalidInputHandling.java        — hasNextInt, validation loop
+P04  BufferedReaderKeyboardDemo.java         — readLine + parseInt
+P05  BufferedReaderParseEdgeCases.java       — empty/invalid input lines
+P06  FileCreateAndWrite.java                 — BufferedWriter, create file
+P07  FileReadSumFromFile.java                — BufferedReader read file
+P08  FileEdgeCasesDemo.java                  — missing / empty / blank lines
+P09  ScannerReadFileDemo.java                — Scanner on file
+P10  FilesModernReadWrite.java               — NIO Files API
+P11  CopyFileReaderWriterDemo.java           — copy A → B (reader + writer)
+P12  ReadThenWriteSameFileDemo.java          — same file: read all, close, write
+P13  AppendToFileDemo.java                   — FileWriter(path, true)
+P14  WhyNotSameReaderWriterDemo.java         — trap: writer truncates same path
+P15  UnsafeMultiThreadWriterDemo.java        — BAD: each thread own writer
+P16  SynchronizedSharedWriterDemo.java       — OK: one writer + synchronized
+P17  SingleWriterThreadQueueDemo.java        — BEST: queue + one writer thread
+P18  LockedReadWriteSameFileDemo.java        — read→write same file under lock
+P19  FileWriterTruncateDemo.java              — FileWriter default = overwrite
+P20  FileWriterAppendDemo.java                — FileWriter(path, true)
+P21  NioWriteTruncateExistingDemo.java        — CREATE + WRITE + TRUNCATE_EXISTING
+P22  NioCreateNewFailIfExistsDemo.java        — CREATE_NEW → fail if exists
+P23  NioAppendDemo.java                       — CREATE + APPEND
+P24  NioReadOnlyDemo.java                     — READ only
+P25  NioWriteFailIfMissingDemo.java           — WRITE only, fail if file missing
+
+DOCS
+  FILE_IO_QUESTIONS.txt                      — Q&A + scenario problems
+  FILE_OPEN_MODES.txt                        — truncate/append/options cheat sheet
+
+DATA: week01_practice/data/
+  numbers.txt, names.txt, empty.txt, scores.txt, shared_counter.txt, result.txt
+  (runtime outputs like thread_*_log.txt stay in source data/ only — not copied to flat)
+
+YOUR TURN (CoreJava/week01_basics/ — do NOT copy reference)
+  1) Sum two numbers using nextLine + parseInt
+  2) Copy numbers.txt → backup.txt
+  3) Read names.txt → write Hello <name> to greetings.txt
+  4) Read numbers.txt → write Sum=30 to sum_result.txt
+  5) Append log line to app.log (append mode)
+  6) Double scores.txt and overwrite (read-close-write)
+  7) Run P15 vs P16 — compare output
+  8) Build queue + single writer in CoreJava
+  9) Two threads update shared_counter.txt with lock
+
+ADVANCED
+  Week 6  → week06_api_practice/
+  Week 8  → week08_thread_production_practice/
+  Week 10 → week10_jvm_production_practice/
+  Week 11 → week11_interview_practice/
+  Index   → core_java_programs_flat/FLAT_PRACTICE_INDEX.txt

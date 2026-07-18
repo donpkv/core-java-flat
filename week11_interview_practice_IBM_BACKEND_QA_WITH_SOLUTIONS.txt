@@ -1,0 +1,152 @@
+IBM BACKEND DEVELOPER — INTERVIEW Q&A WITH SOLUTIONS (3–8 years)
+================================================================
+
+SECTION 1 — JAVA CORE
+---------------------
+
+Q: Explain HashMap collision handling and resizing.
+SOLUTION:
+  - Internal array of buckets. index = hash(key) & (capacity-1)
+  - Collision: multiple keys same bucket → linked list (Java 8+)
+  - Bucket size > 8 → tree (Red-Black) for O(log n) worst case
+  - Load factor default 0.75: when size > capacity*0.75 → double capacity, rehash ALL entries
+  - Demo: week11_interview_practice/P01_HashMapCollisionAndResizeDemo.java
+
+Q: G1GC vs CMS?
+SOLUTION:
+  CMS (Concurrent Mark Sweep):
+    - Low pause goal, marks old gen concurrently
+    - Fragments memory over time, Full GC complications, removed in newer JDKs
+  G1 (Garbage First):
+    - Heap split into equal regions (not classic young/old fixed split)
+    - Predictable pause targets (-XX:MaxGCPauseMillis)
+    - Collects regions with most garbage first
+    - Default on many JDK 11+ deployments
+  ZGC/Shenandoah: sub-ms pauses, very large heaps — mention for scale
+
+Q: @Transactional propagation REQUIRED vs REQUIRES_NEW?
+SOLUTION:
+  REQUIRED (default): join existing transaction or create new if none
+  REQUIRES_NEW: suspend current, always new transaction — audit log saved even if outer rolls back
+  Others: NESTED (savepoint), SUPPORTS, NOT_SUPPORTED, MANDATORY, NEVER
+
+Q: Spring Boot auto-configuration?
+SOLUTION:
+  @SpringBootApplication triggers component scan + auto-config
+  spring.factories / AutoConfiguration.imports lists config classes
+  ConditionalOnClass / ConditionalOnProperty — beans created only if classpath/config matches
+  Example: spring-boot-starter-web → embedded Tomcat + DispatcherServlet auto wired
+
+SECTION 2 — MICROSERVICES & RESILIENCE
+--------------------------------------
+
+Q: Cascading failure — how prevent?
+SOLUTION:
+  1. Circuit Breaker (Resilience4j) — stop calling sick service; fail fast
+  2. Rate Limiting — protect own service from overload
+  3. Bulkhead — isolate thread pools per dependency
+  4. Timeouts + retries with backoff (not infinite retry)
+  5. Async messaging (Kafka) decouples failure domains
+  Demo: P02_MicroserviceResiliencePatternsDemo.java
+
+Q: REST vs Kafka when?
+SOLUTION:
+  REST/gRPC sync: need immediate response (auth, get profile, payment authorize)
+  Kafka async: high throughput, eventual consistency OK (order events, audit, notifications)
+  Kafka: producer continues if consumer temporarily down (retained log)
+
+Q: Service discovery / config?
+SOLUTION:
+  Eureka/Consul for dynamic service locations
+  K8s ConfigMaps + Secrets for env-specific config
+  Externalized config (Spring Cloud Config) — change without redeploy
+
+SECTION 3 — DATABASE & CACHING
+------------------------------
+
+Q: Redis cache eviction LRU?
+SOLUTION:
+  LRU = evict least recently accessed key when maxmemory reached
+  Redis: maxmemory-policy allkeys-lru or volatile-lru
+  App-level: LinkedHashMap accessOrder=true removeEldestEntry
+  Demo: P03_LruCacheEvictionDemo.java
+
+Q: SQL indexing interview point?
+SOLUTION:
+  B-tree index on WHERE/JOIN columns
+  Covering index avoids table lookup
+  Too many indexes slow writes
+  Explain EXPLAIN plan for slow query
+
+SECTION 4 — PRODUCTION DEBUGGING (STAR STORIES)
+-----------------------------------------------
+
+Q: Resolved performance bottleneck in production?
+SOLUTION (STAR):
+  Situation: Payment API p99 latency 3s during peak
+  Task: Root cause without outage
+  Action:
+    - Grafana: thread pool queue depth maxed
+    - 3x jcmd Thread.print 5s apart → 40 threads BLOCKED on synchronized getConfig()
+    - Replaced with ReentrantReadWriteLock; config reads parallel
+  Result: p99 800ms, zero downtime deploy
+
+Q: Fixed memory leak in production?
+SOLUTION (STAR):
+  Situation: Pod restarts every 6h with OOMKilled
+  Task: Find retaining references
+  Action:
+    - Heap chart staircase after Full GC in Datadog
+    - -XX:+HeapDumpOnOutOfMemoryError already set → analyzed hprof in MAT
+    - Leak Suspects: static ConcurrentHashMap cache unbounded for session tokens
+    - Added TTL + max size eviction (Caffeine)
+  Result: stable heap 45% for 30 days, no restarts
+
+Q: Thread freeze / deadlock?
+SOLUTION (STAR):
+  Situation: Order service hung, health check failing
+  Action:
+    - jcmd Thread.print → "Found one Java-level deadlock" between inventory-lock and order-lock
+    - Fixed lock ordering: always acquire inventory before order globally
+  Result: no recurrence in 3 months
+
+SECTION 5 — THREAD SAFETY SELECTION (INTERVIEW TABLE)
+-----------------------------------------------------
+ConcurrentHashMap     → shared cache, high read
+CopyOnWriteArrayList  → listeners, config (rare writes)
+ConcurrentLinkedQueue → lock-free messaging
+ArrayBlockingQueue    → bounded producer-consumer
+LongAdder             → high contention counters
+Semaphore             → throttle concurrent external calls
+ThreadLocal           → per-thread non-thread-safe objects (with remove())
+
+Avoid: Hashtable, Vector, synchronizedMap on hot paths
+
+SECTION 6 — CODING / DSA (COMMON IBM OA)
+----------------------------------------
+- Two sum / hash map
+- Merge intervals
+- LRU cache (LinkedHashMap or DLL+HashMap)
+- Top K frequent (PriorityQueue / heap)
+- Valid parentheses (stack)
+- REST CRUD micro-task in HackerRank (Controller + Service + in-memory repo)
+
+SECTION 7 — DEVOPS TOUCHPOINTS (Band 7 EDGE)
+--------------------------------------------
+- Docker: multi-stage build, JVM in container aware of cgroup memory (-XX:MaxRAMPercentage)
+- K8s: liveness vs readiness probes, HPA on CPU/custom metrics
+- CI/CD: Jenkins/GitLab pipeline — build, test, scan, deploy
+- Mention: never commit secrets; use K8s Secrets / vault
+
+SECTION 8 — QUICK FIRE ANSWERS
+------------------------------
+volatile        → visibility across threads, no compound atomicity
+synchronized    → mutual exclusion + visibility
+ReentrantLock   → tryLock, fair ordering, Conditions
+happens-before  → JMM rule: unlock happens-before next lock on same monitor
+fail-fast       → ConcurrentModificationException on iterator invalidation
+fail-safe       → weakly consistent iterator (ConcurrentHashMap)
+
+Cross-reference production labs:
+  week08_thread_production_practice/
+  week10_jvm_production_practice/

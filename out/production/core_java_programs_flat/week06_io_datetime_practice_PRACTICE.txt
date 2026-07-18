@@ -1,0 +1,43 @@
+WEEK 06 — HTTP / API / REGEX PRACTICE (source of truth)
+============================================================
+Location : core_java_programs/week06_api_practice/
+Flat copy: core_java_programs_flat/week06_io_datetime_practice_*.java
+Questions : week06_api_practice/QUESTIONS.txt
+
+Run from working directory = core_java_programs folder (IntelliJ module root).
+YOUR CODE ONLY goes in: CoreJava/
+
+PROGRESSION (read in order)
+  P01_RegexExtractFieldsFromJson.java
+      Pattern/Matcher, group(1), \\s*, (.*?) on mock JSON string
+
+  P02_BufferedReaderStringBuilderReadLoop.java
+      readLine() loop + StringBuilder (same as HTTP response read)
+
+  P03_URLEncoderQueryStringDemo.java
+      Encode marathon name with spaces for GET query string
+
+  P04_FindSpeedsterOffline.java
+      Full findSpeedster logic on local mock pages (NO internet)
+      data/marathon_page1.json, marathon_page2.json
+
+  P05_HttpGetBufferedReaderLiveDemo.java
+      Live GET to jsonmock.hackerrank.com (needs internet)
+
+  P06_FindSpeedsterLiveGson.java
+      Full findSpeedster LIVE — HttpURLConnection + Gson + pagination (HackerRank solution)
+      Needs libs/gson-2.10.1.jar on module classpath (HackerRank provides Gson)
+      Note: jsonmock API may return empty data; verify logic on P04 mock pages
+
+DATA
+  week06_api_practice/data/
+    marathon_page1.json, marathon_page2.json, sample_oneline_response.txt
+
+YOUR TURN (write in CoreJava/week06_api/ yourself — do NOT copy)
+  1) From sample_oneline_response.txt, print only "name" using regex
+  2) Offline findSpeedster for sex="M" and marathon="Boston Marathon"
+  3) Build URL for page=3 with URLEncoder; print full query string
+  4) (Optional, online) Run P06_FindSpeedsterLiveGson — paginate live API; return max top_speed name
+  5) Explain why regex is used instead of JSON library in CP-style tasks
+
+See QUESTIONS.txt for concept drills (trim, \\s+, read() -1, next vs nextLine, etc.)

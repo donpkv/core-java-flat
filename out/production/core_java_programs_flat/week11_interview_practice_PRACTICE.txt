@@ -1,0 +1,21 @@
+WEEK 11 — IBM BACKEND INTERVIEW (flat folder copy)
+============================================================
+Flat location : core_java_programs_flat/
+Source tree   : core_java_programs/week11_interview_practice/
+
+All files prefixed: week11_interview_practice_*
+
+DOCS
+  week11_interview_practice_IBM_BACKEND_QA_WITH_SOLUTIONS.txt  ← main study file
+  week11_interview_practice_PRACTICE.txt
+
+JAVA
+  week11_interview_practice_P01_HashMapCollisionAndResizeDemo.java
+  week11_interview_practice_P02_MicroserviceResiliencePatternsDemo.java
+  week11_interview_practice_P03_LruCacheEvictionDemo.java
+
+Run from source tree:
+  cd core_java_programs
+  java -cp week11_interview_practice P03_LruCacheEvictionDemo
+
+YOUR CODE: CoreJava/week11_interview/

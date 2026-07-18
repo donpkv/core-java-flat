@@ -1,0 +1,427 @@
+CORE JAVA STUDY ORDER (Day 1-65)
+================================
+Reference folder : core_java_programs_flat/  (+ runnable: week01_practice/, week06_api_practice/, week08_thread_production_practice/, week10_jvm_production_practice/)
+Your practice code: CoreJava/  (YOUR code only — never copy reference here)
+Rule: Read reference -> close -> code yourself -> paste for review
+
+Legend:
+  [R] = read this flat file
+  [P] = practice task (write in CoreJava, do NOT copy)
+
+================================================================================
+WEEK 1 — BASICS
+================================================================================
+Day 1  [R] week01_basics_LoopTest.java
+       [R] week01_basics_BreakProgram.java
+       [P] FizzBuzz (1-100)
+
+Day 2  [R] week01_basics_basicprograms_OperatorTestProgram.java
+       [R] week01_basics_basicprograms_SwitchCaseProgram.java
+       [P] Calculator using switch
+
+Day 3  [R] week01_basics_ArrayProgram.java
+       [R] week01_basics_VarArgsProgram.java
+       [P] Find max/min in array
+
+Day 4  [R] week01_basics_InputPrograms_InputProgramTest.java
+       [R] week01_basics_practice_P01_ScannerSumTwoNumbers.java
+       [R] week01_basics_practice_P02_ScannerNextLineTrapDemo.java
+       [R] week01_basics_practice_P03_ScannerInvalidInputHandling.java
+       [R] week01_basics_practice_P04_BufferedReaderKeyboardDemo.java
+       [R] week01_basics_practice_P05_BufferedReaderParseEdgeCases.java
+       [R] week01_basics_practice_P06_FileCreateAndWrite.java
+       [R] week01_basics_practice_P07_FileReadSumFromFile.java
+       [R] week01_basics_practice_P08_FileEdgeCasesDemo.java
+       [R] week01_basics_practice_P09_ScannerReadFileDemo.java
+       [R] week01_basics_practice_P10_FilesModernReadWrite.java
+       [R] week01_basics_practice_P11_CopyFileReaderWriterDemo.java
+       [R] week01_basics_practice_P12_ReadThenWriteSameFileDemo.java
+       [R] week01_basics_practice_P13_AppendToFileDemo.java
+       [R] week01_basics_practice_P14_WhyNotSameReaderWriterDemo.java
+       [R] week01_basics_practice_P15_UnsafeMultiThreadWriterDemo.java
+       [R] week01_basics_practice_P16_SynchronizedSharedWriterDemo.java
+       [R] week01_basics_practice_P17_SingleWriterThreadQueueDemo.java
+       [R] week01_basics_practice_P18_LockedReadWriteSameFileDemo.java
+       [R] week01_basics_practice_P19_FileWriterTruncateDemo.java
+       [R] week01_basics_practice_P20_FileWriterAppendDemo.java
+       [R] week01_basics_practice_P21_NioWriteTruncateExistingDemo.java
+       [R] week01_basics_practice_P22_NioCreateNewFailIfExistsDemo.java
+       [R] week01_basics_practice_P23_NioAppendDemo.java
+       [R] week01_basics_practice_P24_NioReadOnlyDemo.java
+       [R] week01_basics_practice_P25_NioWriteFailIfMissingDemo.java
+       [R] week01_basics_practice_FILE_IO_QUESTIONS.txt
+       [R] week01_basics_practice_FILE_OPEN_MODES.txt
+       [P] Write YOUR sum program in CoreJava/week01_basics/ (do not copy P01)
+       [P] Copy numbers.txt → backup.txt yourself (see FILE_IO_QUESTIONS S1)
+
+Day 5  [P] Revision: FizzBuzz + max/min + palindrome (no reference)
+
+================================================================================
+WEEK 2 — OOP
+================================================================================
+Day 6  [R] week02_oop_ClassObjectsVarDef.java
+       [R] week02_oop_StudentObjects.java
+       [P] Student class with fields
+
+Day 7  [R] week02_oop_ThisProg.java
+       [R] week02_oop_Encapsulation.java
+       [R] week02_oop_basicprograms_EncapsulationProgram.java
+       [P] Private fields + getters/setters
+
+Day 8  [R] week02_oop_InheritanceTest.java
+       [P] Animal -> Dog, Cat
+
+Day 9  [R] week02_oop_MethodOverLoadRideEx.java
+       [P] Overload + override demo
+       (skip duplicate: week02_oop_exceptions_MethodOverLoadRideEx.java)
+
+Day 10 [R] week02_oop_AbstractClassTest.java
+       [R] week02_oop_AbstractProgram.java
+       [R] week02_oop_AbstractionProgram.java
+       [P] Abstract Shape + Circle
+
+Day 11 [R] week02_oop_Abstraction.java
+       [R] week02_oop_InterfaceAmbiguity.java
+       [R] week02_oop_DeadDiamondDesign.java
+       [R] week02_oop_inheritance_map_INHERITANCE_MAP.txt
+       [R] week02_oop_inheritance_map_I01_MultipleClassInheritanceBlocked.java
+       [R] week02_oop_inheritance_map_I03_TwoInterfacesSameAbstractMethod.java
+       [R] week02_oop_inheritance_map_I04_TwoInterfacesSameDefaultConflict.java
+       [R] week02_oop_inheritance_map_I05_ChildCallsResolvedMethod.java
+       [R] week02_oop_inheritance_map_I06_InterfaceSuperExplicitResolve.java
+       [R] week02_oop_inheritance_map_I08_MethodOverridingVsStaticHiding.java
+       [R] week02_oop_inheritance_map_I09_FieldHidingNotOverriding.java
+       [R] week02_oop_inheritance_map_I12_InheritanceProblemSummary.java
+       [R] week02_oop_inheritance_map_I13_AbstractMustImplementDemo.java
+       [R] week02_oop_inheritance_map_I14_InterfaceMembersDemo.java
+       [R] week02_oop_inheritance_map_I15_InterfacePrivateJava9Demo.java
+       [R] week02_oop_inheritance_map_I16_FieldHidingAbstractParentDemo.java
+       [R] week02_oop_inheritance_map_I17_ParentRefAccessChildFieldDemo.java
+       [R] week02_oop_inheritance_map_I18_InterfaceInheritanceOverrideDemo.java
+       [R] week02_oop_inheritance_map_I19_MultipleInterfaceReferencesDemo.java
+       [R] week02_oop_inheritance_map_I20_DefaultConflictNoOverrideDemo.java
+       [R] week02_oop_inheritance_map_I21_SuperAbstractConstructorDemo.java
+       [P] Two interfaces, one implementation (CoreJava)
+       Index: core_java_program_map/README.txt
+
+Day 12 [R] week02_oop_StaticCheck.java
+       [R] week02_oop_StaticAndDefaultMethods.java
+       [R] week02_oop_InnerClassTest.java
+       [R] week02_oop_InnerWithAnonymousClass.java
+       [R] week02_oop_onepack_Student.java
+       [R] week02_oop_otherpack_ChildClass.java
+       [R] week02_oop_states_cities_Bangalore.java
+       [P] Anonymous Runnable + 2 packages
+
+================================================================================
+WEEK 3 — STRING, EQUALS, ENUM, IMMUTABLE
+================================================================================
+Day 13 [R] week03_string_equals_StringTest.java
+       [R] week03_string_equals_stringprograms_StringBuilderBufferDemo.java
+       [P] Reverse string; == vs equals
+
+Day 14 [R] week03_string_equals_EqualsMethod.java
+       [R] week03_string_equals_EqualsTest.java
+       [R] week03_string_equals_equalshashcode_EqualsHashCodeContractDemo.java
+       [P] Person with equals/hashCode in HashMap
+
+Day 15 [R] week03_string_equals_enums_EnumDemo.java
+       [R] week03_string_equals_enums_EnumSingletonDemo.java
+       [P] OrderStatus enum + switch
+
+Day 16 [R] week03_string_equals_immutable_ImmutableObjectDemo.java
+       [P] Immutable Book class
+
+================================================================================
+WEEK 4 — COLLECTIONS
+================================================================================
+Day 17 [R] week04_collections_CollectionTest.java
+       [R] week04_collections_collections_ArrayListTest.java
+       [P] ArrayList add/remove/iterate
+
+Day 18 [R] week04_collections_collections_HashMapTest.java
+       [P] Word frequency counter
+
+Day 19 [R] week04_collections_collections_SimpleHashSet.java
+       [P] Remove duplicates
+
+Day 20 [R] week04_collections_collections_LinkedListTest.java
+       [R] week04_collections_collections_QueueAndDequeDemo.java
+       [P] Queue using Deque
+
+Day 21 [R] week04_collections_collections_TreeMapTreeSetTest.java
+       [P] Sorted map demo
+
+Day 22 [R] week04_collections_collections_PriorityQueueTest.java
+       [P] Top 3 largest numbers
+
+Day 23 [R] week04_collections_collections_ComparableIfaceTest.java
+       [R] week04_collections_collections_ComparatorIfaceTest.java
+       [P] Sort employees by salary
+
+Day 24 [R] week04_collections_collections_WrapperTest.java
+       [R] week04_collections_collections_IntegerTest.java
+       [R] week04_collections_collections_ClassCastExTest.java
+       [P] Autoboxing demo
+
+Day 25 [R] week04_collections_collections_ConcurrentHashMapTest.java
+       [P] Thread-safe counter
+
+================================================================================
+WEEK 5 — GENERICS & EXCEPTIONS
+================================================================================
+Day 26 [R] week05_generics_exceptions_GenericsTest.java
+       [R] week05_generics_exceptions_GenericsTesterWithPolymorphism.java
+       [P] Box<T> generic class
+
+Day 27 [R] week05_generics_exceptions_exceptions_IndexAndNumberFormatException.java
+       [R] week05_generics_exceptions_exceptions_IndxOutOfBoundExcption.java
+       [P] try/catch demo
+
+Day 28 [R] week05_generics_exceptions_exceptions_UserDefinedException.java
+       [R] week05_generics_exceptions_exceptions_UnreportedException.java
+       [P] InvalidAgeException
+
+Day 29 [R] week05_generics_exceptions_exceptions_TryWithResources.java
+       [P] Read file with try-with-resources
+       (skip duplicate: week05_generics_exceptions_TryWithResources.java)
+
+Day 30 [R] week05_generics_exceptions_exceptions_RethrowExecption.java
+       [P] Wrap and rethrow exception
+       (skip duplicate: week05_generics_exceptions_RethrowExecption.java)
+
+================================================================================
+WEEK 6 — IO, DATE, SERIALIZATION
+================================================================================
+Day 31 [R] week06_io_datetime_ioprograms_ConsoleSample.java
+       [R] week06_io_datetime_ioprograms_CopyTextFileSample.java
+       [R] week06_io_datetime_ioprograms_ReadFileInfoOldWay.java
+       [P] Copy a text file
+
+Day 32 [R] week06_io_datetime_ioprograms_ObjectStreamSample.java
+       [R] week06_io_datetime_SerializableTest.java
+       [P] Serialize/deserialize object
+
+Day 33 [R] week06_io_datetime_nioprograms_PathFilePathTest.java
+       [R] week06_io_datetime_nioprograms_FilesWalkExample1.java
+       [P] List files in folder
+
+Day 34 [R] week06_io_datetime_datetime_DateTime.java
+       [R] week06_io_datetime_datetime_DateTimeAdvanced.java
+       [P] Rental days calculator (LocalDate)
+
+Day 35 [R] week06_io_datetime_CloneableTest.java
+       [R] week06_io_datetime_DataStream.java
+       [P] Read shallow vs deep clone concept
+       (skip duplicate: week06_io_datetime_exceptions_DataStream.java)
+
+Day 35+ API / HTTP PRACTICE (HackerRank-style — read QUESTIONS.txt first)
+       [R] week06_io_datetime_practice_P01_RegexExtractFieldsFromJson.java
+       [R] week06_io_datetime_practice_P02_BufferedReaderStringBuilderReadLoop.java
+       [R] week06_io_datetime_practice_P03_URLEncoderQueryStringDemo.java
+       [R] week06_io_datetime_practice_P04_FindSpeedsterOffline.java
+       [R] week06_io_datetime_practice_P05_HttpGetBufferedReaderLiveDemo.java
+       [R] week06_io_datetime_practice_P06_FindSpeedsterLiveGson.java
+       [P] findSpeedster offline in CoreJava/week06_api/ (marathon + sex → max top_speed name)
+       [P] Answer scenario drills in week06_api_practice/QUESTIONS.txt
+
+================================================================================
+WEEK 7 — FUNCTIONAL JAVA
+================================================================================
+Day 36 [R] week07_functional_LambdaExpressionTest.java
+       [R] week07_functional_LambdaSimpleProgram.java
+       [R] week07_functional_ThreadDemoWtihLambda.java
+       [P] Sort list using lambda
+
+Day 37 [R] week07_functional_functionalinterface_ConsumerInterfaceExample.java
+       [R] week07_functional_functionalinterface_ConsumerInterfaceExample2.java
+       [P] Print each list element
+
+Day 38 [R] week07_functional_functionalinterface_PredeicateTest.java
+       [R] week07_functional_functionalinterface_PredicateTest2.java
+       [P] Filter age > 18
+
+Day 39 [R] week07_functional_functionalinterface_SupplierTest.java
+       [R] week07_functional_functionalinterface_FunctionInterfaceExample.java
+       [P] Supplier + Function compose
+
+Day 40 [R] week07_functional_streams_StreamApiExample.java
+       [R] week07_functional_streams_StreamApiExample2.java
+       [P] map/filter/collect pipeline
+
+Day 41 [R] week07_functional_streams_ParallelStreamExample.java
+       [R] week07_functional_streams_ParallelStreamExample2.java
+       [P] Sum of list (parallel vs sequential)
+
+Day 42 [R] week07_functional_InstanceMethodReference.java
+       [P] String::length in stream
+
+================================================================================
+WEEK 8 — MULTITHREADING
+================================================================================
+Day 43 [R] week08_multithreading_threads_SimpleThreadProgram.java
+       [R] week08_multithreading_threads_Threadexample.java
+       [P] Two threads print 1-5
+
+Day 44 [R] week08_multithreading_threads_RunnableIfaceThread.java
+       [R] week08_multithreading_threads_RunnableIntfaceThread.java
+       [P] Runnable vs Thread
+
+--- DAEMON THREADS (after Day 44, before synchronized) ---
+       [R] week08_multithreading_threads_DAEMON_STUDY.txt
+       [R] week08_multithreading_threads_DaemonBasicsDemo.java          (D01)
+       [R] week08_multithreading_threads_DaemonUserThreadKeepsJvmAliveDemo.java (D02)
+       [R] week08_multithreading_threads_DaemonDoesNotKeepJvmAliveDemo.java   (D03)
+       [R] week08_multithreading_threads_DaemonHeartbeatBackgroundDemo.java     (D04 good pattern)
+       [R] week08_multithreading_threads_DaemonWrongPatternDemo.java            (D05 bad pattern)
+       [R] week08_multithreading_threads_DaemonSetDaemonAfterStartFailsDemo.java (D06)
+       [R] week08_multithreading_threads_DaemonChildInheritsStatusDemo.java     (D07)
+       [P] Write daemon heartbeat logger in CoreJava/ (see DAEMON_STUDY P1)
+
+Day 45 [R] week08_multithreading_concurrency_SynchronizedVsLockDemo.java
+       [R] week08_multithreading_concurrency_ExecutorFrameWtihSyncronize.java
+       [P] Shared counter with synchronized
+
+Day 46 [R] week08_multithreading_threads_ProducerConsumerSolution.java
+       [P] Producer-consumer (wait/notify)
+
+Day 47 [R] week08_multithreading_concurrency_VolatileDemo.java
+       [P] Explain volatile visibility
+
+Day 48 [R] week08_multithreading_concurrency_ReentrantLockDemo.java
+       [P] Counter with ReentrantLock
+
+Day 49 [R] week08_multithreading_concurrency_BlockingQueueDemo.java
+       [P] Producer-consumer with BlockingQueue
+
+Day 50 [R] week08_multithreading_concurrency_ExecutorIntfaceTest.java
+       [R] week08_multithreading_concurrency_SingleThreadExector.java
+       [R] week08_multithreading_concurrency_ExecutorFrameFixedThreadPool.java
+       [R] week08_multithreading_concurrency_EXECUTOR_STUDY.txt
+       [R] week08_multithreading_concurrency_FutureCallableDemo.java              (E01)
+       [R] week08_multithreading_concurrency_ExecutorSubmitVsExecuteDemo.java     (E02)
+       [R] week08_multithreading_concurrency_ExecutorServiceFactoriesDemo.java    (E03)
+       [R] week08_multithreading_concurrency_CustomThreadPoolExecutorDemo.java    (E04)
+       [R] week08_multithreading_concurrency_ExecutorShutdownDemo.java          (E05)
+       [R] week08_multithreading_concurrency_ScheduledExecutorServiceDemo.java    (E06)
+       [P] Thread pool tasks
+
+Day 51 [R] week08_multithreading_concurrency_CountDownLatchDemo.java
+       [P] Wait for 3 workers
+
+Day 52 [R] week08_multithreading_concurrency_CompletableFutureDemo.java
+       [R] week08_multithreading_concurrency_CompletableFutureChainDemo.java       (C01)
+       [R] week08_multithreading_concurrency_CompletableFutureCombineDemo.java     (C02)
+       [R] week08_multithreading_concurrency_CompletableFutureCustomExecutorDemo.java (C03)
+       [R] week08_multithreading_concurrency_CompletableFutureExceptionDemo.java   (C04)
+       [R] week08_multithreading_concurrency_ReentrantLockTryLockDemo.java         (L01)
+       [R] week08_multithreading_concurrency_ReadWriteLockDemo.java                (L02)
+       [R] week08_multithreading_concurrency_StampedLockDemo.java                  (L03)
+       [P] Async chain with CompletableFuture
+
+--- PRODUCTION THREAD PRACTICE (after Day 52 basics) ---
+       [R] week08_multithreading_practice_P01_SemaphoreThrottlingDemo.java
+       [R] week08_multithreading_practice_P02_DeadlockDemoForThreadDump.java
+       [R] week08_multithreading_practice_P03_ReadWriteLockVsSynchronized.java
+       [R] week08_multithreading_practice_P04_AtomicLongAdderDemo.java
+       [R] week08_multithreading_practice_P05_ConcurrentHashMapComputeIfAbsent.java
+       [R] week08_multithreading_practice_P06_ThreadLocalFormatterDemo.java
+       [R] week08_multithreading_practice_P07_BoundedThreadPoolBackpressure.java
+       [R] week08_multithreading_practice_P08_ConcurrentStructureSelectionDemo.java
+       [R] week08_multithreading_practice_P09_LockContentionBlockedThreadsDemo.java
+       [R] week08_multithreading_practice_PRODUCTION_RUNBOOK.txt
+       [R] week08_multithreading_practice_QUESTIONS.txt
+       [P] Capture thread dump on P02; fix P09 with LongAdder in CoreJava/
+
+================================================================================
+WEEK 9 — MODERN JAVA (16-21)
+================================================================================
+Day 53 [R] week09_modern_java_optional_OptionalDemo.java
+       [P] Null-safe user lookup
+
+Day 54 [R] week09_modern_java_modernjava_RecordDemo.java
+       [P] Ticket as a record
+
+Day 55 [R] week09_modern_java_modernjava_SealedClassesDemo.java
+       [P] Sealed Payment types
+
+Day 56 [R] week09_modern_java_modernjava_PatternMatchingDemo.java
+       [P] Switch on sealed type
+
+Day 57 [R] week09_modern_java_annotations_AnnotationsDemo.java
+       [P] Custom @MyTest annotation
+
+================================================================================
+WEEK 10 — JVM, MEMORY, GC
+================================================================================
+Day 58 [R] week10_jvm_jvm_JvmMemoryOverview.java
+       [R] week10_jvm_jvm_StackVsHeapDemo.java
+       [P] Draw stack vs heap diagram
+
+Day 59 [R] week10_jvm_jvm_HeapMemoryDemo.java
+       [R] week10_jvm_jvm_GarbageCollectionDemo.java
+       [P] Run: java -Xms64m -Xmx128m ... HeapMemoryDemo
+
+Day 60 [R] week10_jvm_jvm_MemoryLeakDemo.java
+       [R] week10_jvm_jvm_StringPoolDemo.java
+       [P] Write leak + fix it
+
+Day 61 [R] week10_jvm_jvm_MetaspaceDemo.java
+       [R] week10_jvm_jvm_GcCollectorsOverview.java
+       [P] Name G1, ZGC, -Xmx flags
+
+Day 62 [R] week10_jvm_jvm_JvmManagementDemo.java
+       [P] Explain MemoryMXBean
+
+--- PRODUCTION JVM / MEMORY LEAK PRACTICE ---
+       [R] week10_jvm_practice_P01_StaticCacheMemoryLeakDemo.java
+       [R] week10_jvm_practice_P02_LiveHeapMetricsViaJmx.java
+       [R] week10_jvm_practice_P03_StackOverflowDemo.java
+       [R] week10_jvm_practice_P04_HeapOomSimulationGuide.java
+       [R] week10_jvm_practice_P05_ProductionMemoryLeakTriageChecklist.java
+       [R] week10_jvm_practice_P06_GcSawtoothVsStaircaseGuide.java
+       [R] week10_jvm_practice_PRODUCTION_RUNBOOK.txt
+       [R] week10_jvm_practice_QUESTIONS.txt
+       [P] Run P04 with -Xmx32m + HeapDumpOnOutOfMemoryError; fix P01 leak in CoreJava/
+
+================================================================================
+WEEK 11 — EXTRAS (optional)
+================================================================================
+Day 63 [R] week11_extras_junittestcases_BasicAnnotationTest.java
+       [R] week11_extras_junittestcases_JunitTestCaseExample.java
+
+Day 64 [R] week11_extras_dbprograms_DBConnectionTest.java
+
+Day 65 [R] week11_extras_sockets_ClientProgram.java
+       [R] week11_extras_sockets_ServerProgram.java
+
+--- IBM BACKEND INTERVIEW PREP (3–8 years) ---
+       [R] week11_interview_practice_IBM_BACKEND_QA_WITH_SOLUTIONS.txt
+       [R] week11_interview_practice_P01_HashMapCollisionAndResizeDemo.java
+       [R] week11_interview_practice_P02_MicroserviceResiliencePatternsDemo.java
+       [R] week11_interview_practice_P03_LruCacheEvictionDemo.java
+       [P] Write STAR story: production leak OR thread BLOCKED fix in CoreJava/
+
+SKIP (not recommended): week11_extras_dbaselogin_* files
+
+================================================================================
+OPTIONAL READ LATER (not in day plan)
+================================================================================
+week01_basics_basicprograms_LoopTest.java        (duplicate of Day 1)
+week01_basics_Main.java
+week01_basics_SimpleAssumptionProgram.java
+week01_basics_basicprograms.java
+week04_collections_collections_EqualsOverriding.java
+week04_collections_collections_VehicalTestWithEquals.java
+week04_collections_collections_StoreUserDefClassInCollection.java
+week08_multithreading_threads_PollingCheckResultThread.java
+week08_multithreading_concurrency_ExceuterFrameworkZooInfo.java
+week08_multithreading_concurrency_ExecutorFrameworkSubmitTest.java
+week11_extras_practise_practise.java
+
+================================================================================
+START NOW
+================================================================================
+Day 1 reference : week01_basics_LoopTest.java
+Day 1 practice  : CoreJava/src/week01_basics/FizzBuzz.java
+Then say        : "review Week 1 Day 1"

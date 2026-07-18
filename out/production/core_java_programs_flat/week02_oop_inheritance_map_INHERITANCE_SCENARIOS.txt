@@ -1,0 +1,55 @@
+SCENARIO → PROBLEM → FIX
+========================
+
+1) class Child extends Parent1, Parent2
+   Problem : compile error — only one superclass
+   Fix     : one extends; use implements for others (I01)
+
+2) Tiger extends Animal; Lion extends Animal; Liger extends Tiger, Lion
+   Problem : diamond — second extends illegal (I02)
+   Fix     : Liger extends one class; implements interfaces from both sides
+
+3) interface A { void go(); }  interface B { void go(); }
+   class C implements A, B { void go() {...} }
+   Problem : none — one method satisfies both abstracts (I03)
+   Call    : new C().go() → C's implementation (I05)
+
+4) interface A { default void go(){} }  interface B { default void go(){} }
+   class C implements A, B
+   Problem : compile error — inherits go() from both (I04)
+   Fix     : @Override void go() { ... } required
+   Call    : new C().go() → C's override only (I05)
+   Fix+    : call A.super.go(); B.super.go(); inside override (I06)
+
+5) class Parent { void m(){} }  interface I { default void m(){} }
+   class Child extends Parent implements I
+   Problem : class method wins over interface default (I07)
+   Call    : new Child().m() → Parent's version unless Child overrides
+
+6) Parent { static void s(){} }  Child { static void s(){} }
+   Problem : hides, not overrides — Parent.s() and Child.s() are different
+   Call    : Parent p = new Child(); p.s() → Parent.s() if ref is Parent type (I08)
+
+7) Parent { int x=10; }  Child extends Parent { int x=20; }
+   Problem : field hiding — no dynamic dispatch for fields (I09)
+   Call    : Parent p = new Child(); p.x → 10 (reference type wins)
+
+8) abstract Animal { abstract void sound(); }
+   abstract Mammal extends Animal { /* sound still abstract */ }
+   class Dog extends Mammal { void sound(){} }
+   Problem : middle abstract class need not implement all (I11)
+   Fix     : concrete Dog must implement remaining abstract methods
+
+9) Child overrides method — which runs?
+   Parent p = new Child(); p.method() → Child's version (runtime polymorphism) (I05, I10)
+
+10) super.method() in Child
+    Calls immediate parent's version, not grandparent directly (I10)
+
+INTERVIEW ONE-LINERS
+--------------------
+- Java: single inheritance (class), multiple interfaces
+- Default method clash → override mandatory
+- Abstract method clash → single implementation OK
+- Diamond: solved by disallowing multi-class extends
+- Fields/static: hiding; instance methods: overriding

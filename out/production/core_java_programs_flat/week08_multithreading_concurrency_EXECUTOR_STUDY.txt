@@ -1,0 +1,60 @@
+EXECUTOR + COMPLETABLEFUTURE + LOCKS — STUDY PATH
+Run from: core_java_programs/
+Compile:  javac concurrency/FutureCallableDemo.java concurrency/Executor*.java concurrency/Custom*.java concurrency/Scheduled*.java concurrency/CompletableFuture*.java concurrency/ReentrantLockTryLockDemo.java concurrency/ReadWriteLockDemo.java concurrency/StampedLockDemo.java
+
+PART A — Future & ExecutorService basics
+  E01  FutureCallableDemo.java           Callable, Future.get(), timeout, cancel
+  E02  ExecutorSubmitVsExecuteDemo.java execute vs submit, ExecutionException
+  E03  ExecutorServiceFactoriesDemo.java fixed vs cached vs single
+  E04  CustomThreadPoolExecutorDemo.java core/max/queue/CallerRunsPolicy
+  E05  ExecutorShutdownDemo.java         shutdown vs shutdownNow
+  E06  ScheduledExecutorServiceDemo.java schedule + scheduleAtFixedRate
+
+  Legacy (still useful):
+       ExecutorIntfaceTest.java          Executor interface only
+       ExecutorFrameFixedThreadPool.java older fixed pool + Future example
+
+PART B — CompletableFuture
+  C01  CompletableFutureChainDemo.java   thenApply vs thenCompose
+  C02  CompletableFutureCombineDemo.java allOf, anyOf, thenCombine
+  C03  CompletableFutureCustomExecutorDemo.java custom thread pool
+  C04  CompletableFutureExceptionDemo.java exceptionally, handle, whenComplete
+
+  Legacy:
+       CompletableFutureDemo.java      quick intro (supplyAsync + exceptionally)
+
+PART C — Locks (beyond synchronized)
+  L01  ReentrantLockTryLockDemo.java     tryLock, timed tryLock
+  L02  ReadWriteLockDemo.java           parallel reads
+  L03  StampedLockDemo.java             optimistic read
+
+  Existing:
+       ReentrantLockDemo.java           fair lock + lock/unlock
+       SynchronizedVsLockDemo.java      compare approaches
+
+PART D — Production (week08_thread_production_practice/)
+  P01  Semaphore throttling
+  P03  ReadWriteLock vs synchronized benchmark
+  P07  Bounded pool (similar to E04 — run both and compare)
+
+Suggested day order (after thread basics + daemon):
+  Day 1: E01 → E03
+  Day 2: E04 → E06 + E05
+  Day 3: C01 → C04
+  Day 4: L01 → L03 + ReentrantLockDemo
+  Day 5: P01, P03, P07 production practice
+
+Practice (CoreJava/):
+  P1. Fixed pool(3) + Callable returning sum of 1..100 via Future.get()
+  P2. CompletableFuture: fetch user then fetch orders (thenCompose), combine 3 API calls (allOf)
+  P3. Custom ThreadPoolExecutor queue=2, reject with AbortPolicy — observe RejectedExecutionException
+  P4. ReadWriteLock cache: 5 readers + 1 writer — time parallel reads
+
+Interview cheat sheet:
+  execute()     → void, exceptions swallowed to UncaughtExceptionHandler
+  submit()      → Future, exception wrapped in ExecutionException on get()
+  shutdown()    → orderly stop, queue drains
+  shutdownNow() → interrupt workers, return pending tasks
+  thenApply     → map value
+  thenCompose   → chain async step (flatMap)
+  tryLock       → don't block forever on contested lock

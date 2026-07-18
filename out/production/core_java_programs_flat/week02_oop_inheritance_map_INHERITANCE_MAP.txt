@@ -1,0 +1,49 @@
+JAVA INHERITANCE — PROBLEMS MAP & STUDY GUIDE
+==============================================
+Location : core_java_programs/inheritance_map/
+Flat copy: core_java_programs_flat/week02_oop_inheritance_map_*
+Run from : core_java_programs/ (working directory)
+Your code : CoreJava/week02_inheritance/ ONLY
+
+STUDY ORDER (I01 → I12)
+-----------------------
+I01  MultipleClassInheritanceBlocked     — Java: one class parent only
+I02  DiamondProblemDemo                 — extends two classes = compile error
+I03  TwoInterfacesSameAbstractMethod    — ONE override satisfies both interfaces
+I04  TwoInterfacesSameDefaultConflict   — default clash → must override
+I05  ChildCallsResolvedMethod           — which method() runs on child ref?
+I06  InterfaceSuperExplicitResolve      — A.super.method() + B.super.method()
+I07  ClassVsInterfaceDefaultConflict    — class method wins over interface default
+I08  MethodOverridingVsStaticHiding     — instance override vs static hide
+I09  FieldHidingNotOverriding           — fields are hidden, not overridden
+I10  SuperCallChainDemo                 — super.method() chain
+I11  AbstractPartialImplementation      — abstract middle class
+I12  InheritanceProblemSummary          — prints decision table (no compile tricks)
+
+ALSO READ (existing reference in core_java_programs/)
+  InterfaceAmbiguity.java   — same as I04/I06 pattern (older style)
+  DeadDiamondDesign.java    — same as I02
+
+QUICK ANSWERS
+-------------
+Q: Two interfaces, same abstract method, one class implements both?
+A: Implement ONCE in class. Call on child → your single method runs. (I03, I05)
+
+Q: Two interfaces, same default method?
+A: Compiler forces override in implementing class. (I04)
+   Call child.method() → your override runs. (I05)
+   Inside override: A.super.method() and B.super.method() to call each default. (I06)
+
+Q: Multiple class inheritance?
+A: Not allowed. (I01, I02)
+
+Q: Diamond problem?
+A: Class can't extend Tiger and Lion both. Use interfaces instead. (I02)
+
+Q: Field with same name in parent/child?
+A: Field HIDING — reference type decides which field. (I09)
+
+Q: static method same signature in parent/child?
+A: Method HIDING — not polymorphic. (I08)
+
+See INHERITANCE_SCENARIOS.txt for scenario → fix table.

@@ -1,0 +1,29 @@
+WEEK 08 — THREAD PRODUCTION PRACTICE
+============================================================
+Location : core_java_programs/week08_thread_production_practice/
+Flat copy: core_java_programs_flat/week08_multithreading_practice_*
+Commands : PRODUCTION_RUNBOOK.txt
+YOUR CODE  : CoreJava/week08_production/
+
+P01  Semaphore throttling (limit concurrent IO)
+P02  Deadlock demo → practice jcmd Thread.print
+P03  ReentrantReadWriteLock vs synchronized
+P04  AtomicInteger / LongAdder vs synchronized counter
+P05  ConcurrentHashMap.computeIfAbsent cache pattern
+P06  ThreadLocal isolation (SimpleDateFormat)
+P07  Bounded ThreadPoolExecutor + CallerRunsPolicy
+P08  Concurrent structure selection matrix
+P09  Lock contention → many BLOCKED threads in dump
+
+YOUR TURN (CoreJava)
+  1) Throttle max 5 concurrent "API calls" with Semaphore
+  2) Fix P09 bottleneck using LongAdder instead of synchronized counter
+  3) Write producer-consumer with ArrayBlockingQueue capacity 100
+  4) Capture thread dump on P02 while deadlocked; paste BLOCKED section
+  5) Explain when CopyOnWriteArrayList beats ConcurrentHashMap
+
+PRODUCTION SKILLS (read QUESTIONS.txt + PRODUCTION_RUNBOOK.txt)
+  - Thread dumps (3 samples, 5 sec apart)
+  - Deadlock / BLOCKED / RUNNABLE stuck analysis
+  - Bottleneck fixes: RW lock, atomics, ThreadLocal, bounded pools
+  - APM metrics: thread count, lock contention time

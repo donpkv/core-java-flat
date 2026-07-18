@@ -1,0 +1,26 @@
+{
+  "page": 1,
+  "per_page": 3,
+  "total": 5,
+  "total_pages": 2,
+  "data": [
+    {
+      "name": "Alice Runner",
+      "marathon_name": "Boston Marathon",
+      "sex": "F",
+      "top_speed": 18.2
+    },
+    {
+      "name": "Bob Fast",
+      "marathon_name": "Boston Marathon",
+      "sex": "M",
+      "top_speed": 21.5
+    },
+    {
+      "name": "Carol Sprint",
+      "marathon_name": "Boston Marathon",
+      "sex": "F",
+      "top_speed": 19.8
+    }
+  ]
+}

@@ -1,0 +1,28 @@
+WEEK 10 — JVM PRODUCTION (flat folder copy)
+============================================================
+Flat location : core_java_programs_flat/
+Source tree   : core_java_programs/week10_jvm_production_practice/
+
+All files prefixed: week10_jvm_practice_*
+
+JAVA
+  week10_jvm_practice_P01_StaticCacheMemoryLeakDemo.java
+  week10_jvm_practice_P02_LiveHeapMetricsViaJmx.java
+  week10_jvm_practice_P03_StackOverflowDemo.java
+  week10_jvm_practice_P04_HeapOomSimulationGuide.java
+  week10_jvm_practice_P05_ProductionMemoryLeakTriageChecklist.java
+  week10_jvm_practice_P06_GcSawtoothVsStaircaseGuide.java
+
+DOCS
+  week10_jvm_practice_PRACTICE.txt
+  week10_jvm_practice_QUESTIONS.txt
+  week10_jvm_practice_PRODUCTION_RUNBOOK.txt
+
+Run from source tree:
+  cd core_java_programs
+  java -cp week10_jvm_production_practice P05_ProductionMemoryLeakTriageChecklist
+
+OOM lab:
+  java -Xms16m -Xmx32m -XX:+HeapDumpOnOutOfMemoryError -cp week10_jvm_production_practice P04_HeapOomSimulationGuide
+
+YOUR CODE: CoreJava/week10_production/

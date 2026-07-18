@@ -1,0 +1,43 @@
+FILE OPEN MODES — QUICK REFERENCE (Week 01 P19-P25)
+====================================================
+
+FILEWRITER (legacy — only 2 modes)
+----------------------------------
+  new FileWriter(path)         TRUNCATE / overwrite from start (P19)
+  new FileWriter(path, false)  same as above
+  new FileWriter(path, true)   APPEND at end (P20)
+  Cannot: read-only, CREATE_NEW, fail-if-missing
+
+NIO StandardOpenOption (full control — prefer in new code)
+----------------------------------------------------------
+  READ                         read only (P24)
+  WRITE                        write; file must exist unless CREATE also set (P25)
+  CREATE                       create file if missing
+  CREATE_NEW                   create only if absent; fail if exists (P22)
+  TRUNCATE_EXISTING            empty file before write (P21)
+  APPEND                       write at end, no truncate (P23)
+  DELETE_ON_CLOSE              delete when stream closed (rare)
+  SYNC / DSYNC                   force disk sync (performance cost)
+
+COMMON COMBINATIONS
+-------------------
+  Read file:           Files.newBufferedReader(path, READ)
+  Overwrite/create:    CREATE, WRITE, TRUNCATE_EXISTING
+  Append log:          CREATE, APPEND
+  New file only:       CREATE_NEW, WRITE
+  Update existing only: WRITE, TRUNCATE_EXISTING  (no CREATE → fails if missing)
+  Copy:                reader on source, writer with CREATE+WRITE+TRUNCATE on dest
+
+WHEN FILEWRITER TRUNCATES
+-------------------------
+  Every time you open FileWriter(path) or FileWriter(path, false)
+  Closing writer does NOT delete file — next open truncates again
+
+WHEN APPEND
+-----------
+  FileWriter(path, true)
+  Files.write(..., APPEND) — usually add CREATE too so file can be new
+
+PROGRAMS
+  P19 truncate | P20 append | P21 NIO truncate | P22 CREATE_NEW
+  P23 NIO append | P24 read-only | P25 write fail-if-missing

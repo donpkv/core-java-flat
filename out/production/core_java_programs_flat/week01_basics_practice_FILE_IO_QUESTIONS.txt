@@ -1,0 +1,92 @@
+WEEK 01 — FILE READER / WRITER Q&A
+===================================
+
+Q1. Can I use same BufferedReader and BufferedWriter on one file at once?
+A. No. Writer often truncates file; streams conflict. Read fully → close → then write.
+
+Q2. Can Reader and Writer be in same try block?
+A. Yes, if they point to DIFFERENT files (copy pattern). See P11.
+
+Q3. How to update same file safely?
+A. Read all lines into List → close reader → open writer → write. See P12.
+
+Q4. FileWriter(path) vs FileWriter(path, true)?
+A. Default = overwrite from start. true = append at end. See P13.
+
+Q5. What happens if Writer opens before Reader on same path?
+A. File truncated to empty; reader gets null/empty. See P14.
+
+Q6. Copy numbers.txt line by line — which classes?
+A. BufferedReader + FileReader on source, BufferedWriter + FileWriter on dest.
+
+Q7. When to use Files.readAllLines / Files.writeString instead?
+A. Small text files — simpler one-liner (P10). BufferedReader for line-by-line control.
+
+Q8. Do I need newLine() after write()?
+A. write() does not add \n. Use newLine() for proper line endings.
+
+Q9. try-with-resources on reader and writer?
+A. Both auto-close in reverse order — good for copy (P11).
+
+Q10. Read file, add 3rd number, write back — steps?
+A. 1) Read existing into list  2) Close reader  3) Add new value  4) Write all lines
+
+SCENARIO PROBLEMS (write in CoreJava/week01_basics/)
+----------------------------------------------------
+S1. Copy numbers.txt → backup.txt (BufferedReader/Writer)
+S2. Read names.txt, write "Hello <name>" to greetings.txt (skip blank lines)
+S3. Read numbers.txt, write sum to sum_result.txt (one line: Sum=30)
+S4. Append timestamp line to app.log each run (append mode)
+S5. Read scores.txt, multiply each by 2, overwrite scores.txt (read-close-write)
+S6. Explain why opening Writer first on numbers.txt loses data
+
+TRAP QUESTIONS
+--------------
+T1. One try { reader + writer same path } — what goes wrong?
+T2. Forgot to close reader before writer on same file — risk?
+T3. Used write() without newLine() — file looks like one long line?
+
+Reference solutions: P11-P25, FILE_OPEN_MODES.txt
+
+PART F — TRUNCATE / APPEND / OPEN OPTIONS (P19-P25)
+----------------------------------------------------
+Q17. When does FileWriter truncate?
+A. Default FileWriter(path) or (path, false) — clears file on open. P19.
+
+Q18. How to append with FileWriter?
+A. FileWriter(path, true). P20.
+
+Q19. Full control over create/append/truncate?
+A. NIO StandardOpenOption — see FILE_OPEN_MODES.txt and P21-P25.
+
+Q20. Fail if file already exists?
+A. StandardOpenOption.CREATE_NEW. P22.
+
+Q21. Fail if file does NOT exist (write)?
+A. WRITE without CREATE. P25.
+
+Q22. Read only?
+A. Files.newBufferedReader(path, READ). P24.
+
+PART E — MULTI-THREAD READ / WRITE
+----------------------------------
+Q11. Can multiple threads use BufferedWriter on same file?
+A. Not safely without coordination. BufferedWriter is not thread-safe.
+
+Q12. Each thread opens own FileWriter append — safe?
+A. No. Lines can be garbled/broken. See P15.
+
+Q13. Simple fix for multi-thread append?
+A. One shared writer + synchronized(lock) on every write. See P16.
+
+Q14. Production pattern for log file from many threads?
+A. BlockingQueue + single writer thread owns BufferedWriter. See P17.
+
+Q15. Two threads read and write same file?
+A. Use one lock; read fully then write inside synchronized — never overlap. See P18.
+
+Q16. Read thread + write thread at same time on same path?
+A. Unsafe without lock — writer may truncate or reader sees partial data.
+
+S7. Three threads append logs — implement with queue + one writer
+S8. Explain why P15 output is broken but P17 is clean
